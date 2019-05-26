@@ -19,3 +19,7 @@ spec:
         image: vault:1.1.2
         ports:
         - containerPort: 8200
+        securityContext:
+          capabilities:
+            add:
+            - IPC_LOCK

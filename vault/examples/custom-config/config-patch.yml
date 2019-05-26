@@ -1,0 +1,43 @@
+---
+- op: add
+  path: /spec/volumeClaimTemplates
+  value: []
+- op: add
+  path: /spec/template/spec/volumes
+  value: []
+- op: add
+  path: /spec/template/spec/containers/0/volumeMounts
+  value: []
+- op: add
+  path: /spec/volumeClaimTemplates/-
+  value:
+    metadata:
+      name: file
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+- op: add
+  path: /spec/template/spec/volumes/-
+  value:
+    name: config
+    configMap:
+      name: config
+- op: add
+  path: /spec/template/spec/containers/0/volumeMounts/-
+  value:
+    name: file
+    mountPath: /vault/file
+- op: add
+  path: /spec/template/spec/containers/0/volumeMounts/-
+  value:
+    name: config
+    mountPath: /vault/config
+- op: add
+  path: /spec/template/spec/containers/0/args
+  value:
+  - vault
+  - server
+  - -config
+  - /vault/config/config.hcl
