@@ -1,0 +1,17 @@
+---
+- op: add
+  path: /spec/template/spec/containers/0/volumeMounts/-
+  value:
+    name: config
+    mountPath: /usr/local/etc/redis
+- op: add
+  path: /spec/template/spec/volumes
+  value:
+  - name: config
+    configMap:
+      name: config
+- op: add
+  path: /spec/template/spec/containers/0/args
+  value:
+  - redis-server
+  - /usr/local/etc/redis/redis.conf
