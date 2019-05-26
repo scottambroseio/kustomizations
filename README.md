@@ -1,0 +1,2 @@
+# kustomizations
+kustomize bases
